@@ -1,6 +1,6 @@
-package text;
+package com.pengjun.tpf.rule;
 
-public class AddBracketSpace extends Rule {
+public class AddBracketSpaceRule extends BaseRule {
 
 	@Override
 	public String process(String srcStr) {
@@ -8,9 +8,14 @@ public class AddBracketSpace extends Rule {
 		int k = 0;
 		for (int i = 0; i < srcStr.length(); i++) {
 			char c = srcStr.charAt(i);
-			if (i != srcStr.length() - 1 && c == '(' && srcStr.charAt(i + 1) == ')') {
+			if (i != srcStr.length() - 1 && c == '('
+					&& srcStr.charAt(i + 1) == ')') {
 				strArr[k++] = c;
-				strArr[k++] = '\t';
+				strArr[k++] = ' ';
+				strArr[k++] = ' ';
+				strArr[k++] = ' ';
+				strArr[k++] = ' ';
+				strArr[k++] = ' ';
 			} else {
 				strArr[k++] = c;
 			}

@@ -1,6 +1,6 @@
-package text;
+package com.pengjun.tpf.rule;
 
-public class AddTabRule extends Rule {
+public class AddTabRule extends BaseRule {
 
 	@Override
 	public String process(String srcStr) {
@@ -9,16 +9,13 @@ public class AddTabRule extends Rule {
 		int k = 0;
 		for (int i = 0; i < srcStr.length(); i++) {
 			char c = srcStr.charAt(i);
-			if ((i != 0 && i != srcStr.length() - 1) && (c == 'B' || c == 'C' || c == 'D')
+			if ((i != 0 && i != srcStr.length() - 1)
+					&& (c == 'B' || c == 'C' || c == 'D')
 					&& srcStr.charAt(i + 1) == '.') {
-				strArr[k++] = ' ';
-				strArr[k++] = ' ';
-				strArr[k++] = ' ';
-				strArr[k++] = ' ';
+				strArr[k++] = '#';
 			}
 			strArr[k++] = c;
 		}
 		return new String(strArr).trim();
 	}
-
 }
