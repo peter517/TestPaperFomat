@@ -1,13 +1,14 @@
 package com.pengjun.tpf.tools;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.pengjun.tpf.rule.AddBracketSpaceRule;
 import com.pengjun.tpf.rule.AddTabRule;
-import com.pengjun.tpf.rule.DeleteAllSpaceAndTabRule;
 import com.pengjun.tpf.rule.BaseRule;
+import com.pengjun.tpf.rule.DeleteAllSpaceAndTabRule;
 import com.pengjun.utils.FileUtils;
 import com.pengjun.utils.POIUtils;
 
@@ -29,7 +30,8 @@ public class TestPaperTools {
 		return str;
 	}
 
-	public static String formatWholeDoc(String filePath) {
+	public static String formatWholeDoc(String filePath)
+			throws FileNotFoundException {
 
 		List<String> strList = POIUtils.readWordDocx(filePath);
 
