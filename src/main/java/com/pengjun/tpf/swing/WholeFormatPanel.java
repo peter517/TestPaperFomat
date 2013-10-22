@@ -4,7 +4,6 @@ import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.BoxLayout;
@@ -21,8 +20,7 @@ public class WholeFormatPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private String choosePath = FileSystemView.getFileSystemView()
-			.getHomeDirectory().getAbsolutePath();
+	private String choosePath = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
 	private final static String CHOOSE_FILE = "选择文件";
 	private final static String START_FORMAT = "开始转化";
 	private final static String FORMAT_OK = "转化成功";
@@ -65,16 +63,7 @@ public class WholeFormatPanel extends JPanel {
 					public void run() {
 
 						String dstFilePath = null;
-						try {
-							dstFilePath = TestPaperTools
-									.formatWholeDoc(filePath);
-						} catch (FileNotFoundException e1) {
-							pbFormat.setString(FORMAT_FAILED + ",请先关闭相关文件");
-							pbFormat.setIndeterminate(false);
-							e1.printStackTrace();
-							return;
-
-						}
+						dstFilePath = TestPaperTools.formatWholeDoc(filePath);
 
 						try {
 							Desktop.getDesktop().open(new File(dstFilePath));

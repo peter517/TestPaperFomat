@@ -36,7 +36,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>com.pengjun.main.MainFrame</mainClass>
+							<mainClass>com.pengjun.tpf.swing.MainFrame</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -51,5 +51,14 @@
 				</executions>
 			</plugin>
 		</plugins>
-			</build>
+	</build>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.pengjun</groupId>
+			<artifactId>PUtils</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
 </project>
