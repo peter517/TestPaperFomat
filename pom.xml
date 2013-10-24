@@ -4,11 +4,11 @@
 
 
 	<groupId>com.pengjun</groupId>
-	<artifactId>TestPaperFomat</artifactId>
+	<artifactId>TestPaperFormat</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
 
-	<name>TestPaperFomat</name>
+	<name>TestPaperFormat</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>

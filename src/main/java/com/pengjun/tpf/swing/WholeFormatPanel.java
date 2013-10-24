@@ -15,12 +15,14 @@ import javax.swing.JScrollPane;
 import javax.swing.filechooser.FileSystemView;
 
 import com.pengjun.tpf.tools.TestPaperTools;
+import com.pengjun.utils.FileUtils;
 
 public class WholeFormatPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private String choosePath = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
+	private String choosePath = FileSystemView.getFileSystemView()
+			.getHomeDirectory().getAbsolutePath();
 	private final static String CHOOSE_FILE = "选择文件";
 	private final static String START_FORMAT = "开始转化";
 	private final static String FORMAT_OK = "转化成功";
@@ -51,29 +53,34 @@ public class WholeFormatPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				final String filePath = pbFormat.getString();
+				pbFormat.setStringPainted(true);
+				btStart.setEnabled(false);
+
+				if (!FileUtils.getExtensionName(filePath).endsWith("docx")) {
+					pbFormat.setString("请选择word2007或以上的word版本!");
+					return;
+				}
 
 				pbFormat.setIndeterminate(true);
-				pbFormat.setStringPainted(true);
 				pbFormat.setString("正在转化，请稍等……");
-				btStart.setEnabled(false);
 
 				new Thread(new Runnable() {
 
 					@Override
 					public void run() {
 
-						String dstFilePath = null;
-						dstFilePath = TestPaperTools.formatWholeDoc(filePath);
-
 						try {
+							String dstFilePath = TestPaperTools
+									.formatWholeDoc(filePath);
 							Desktop.getDesktop().open(new File(dstFilePath));
-						} catch (IOException e) {
-							e.printStackTrace();
+							pbFormat.setString(FORMAT_OK + ",转化文件路径为 ："
+									+ filePath + ", 正在打开文件……");
+						} catch (IOException e1) {
+							pbFormat.setString(FORMAT_FAILED + ",请关闭相关文件");
+							e1.printStackTrace();
 						}
 
-						pbFormat.setString(FORMAT_OK + ", 转化文件路径为 ：" + filePath);
 						pbFormat.setIndeterminate(false);
-						btStart.setEnabled(false);
 					}
 				}).start();
 			}
@@ -99,5 +106,4 @@ public class WholeFormatPanel extends JPanel {
 			}
 		});
 	}
-
 }

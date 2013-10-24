@@ -1,7 +1,6 @@
 package com.pengjun.tpf.tools;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,19 +30,16 @@ public class TestPaperTools {
 		return str;
 	}
 
-	public static String formatWholeDoc(String filePath) {
+	public static String formatWholeDoc(String filePath) throws IOException {
 
 		List<String> strList = null;
-		try {
-			strList = POIUtils.readWordDocx(filePath);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		strList = POIUtils.readWordDocx(filePath);
 
 		List<String> resultList = new ArrayList<String>();
 		for (String str : strList) {
 			String tempStr = new DeleteAllSpaceAndTabRule().process(str);
-			if ((tempStr.contains("A.") && tempStr.contains("B.") && tempStr.contains("C."))) {
+			if ((tempStr.contains("A.") && tempStr.contains("B.") && tempStr
+					.contains("C."))) {
 				for (BaseRule rule : ruleList) {
 					str = rule.process(str);
 				}
@@ -53,14 +49,11 @@ public class TestPaperTools {
 		}
 
 		File file = new File(filePath);
-		String dstPath = file.getParent() + File.separator + FileUtils.getFileNameNoEx(file.getName())
-				+ "_format." + FileUtils.getExtensionName(file.getName());
+		String dstPath = file.getParent() + File.separator
+				+ FileUtils.getFileNameNoEx(file.getName()) + "_format."
+				+ FileUtils.getExtensionName(file.getName());
 
-		try {
-			POIUtils.writeWordDocx(dstPath, resultList);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		POIUtils.writeWordDocx(dstPath, resultList);
 
 		return dstPath;
 	}
