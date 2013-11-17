@@ -9,8 +9,8 @@ public class AddTabRule extends BaseRule {
 		int k = 0;
 		for (int i = 0; i < srcStr.length(); i++) {
 			char c = srcStr.charAt(i);
-			if ((i != 0 && i != srcStr.length() - 1)
-					&& (c == 'B' || c == 'C' || c == 'D')
+			if ((c == 'B' || c == 'C' || c == 'D')
+					&& (i != 0 && i != srcStr.length() - 1)
 					&& srcStr.charAt(i + 1) == '.') {
 				strArr[k++] = '#';
 			}

@@ -9,7 +9,11 @@ public class DeleteAllSpaceAndTabRule extends BaseRule {
 
 		for (int i = 0; i < srcStr.length(); i++) {
 			char c = srcStr.charAt(i);
-			if (c == ' ' || c == '\t' || c == '#') {
+			if (c == '\t' || c == '#') {
+				continue;
+			}
+			if ((c == ' ') && (i != 0 && i != srcStr.length() - 1)
+					&& srcStr.charAt(i + 1) == ' ') {
 				continue;
 			}
 			strArr[k++] = c;
